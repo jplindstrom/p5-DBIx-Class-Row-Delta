@@ -176,6 +176,13 @@ L<http://search.cpan.org/dist/DBIx-Class-Row-Delta/>
 =back
 
 
+=head1 CONTRIBUTE
+
+The source for this module is on GitHub: https://github.com/jplindstrom/p5-DBIx-Class-Row-Delta
+
+Patches welcome, etc.
+
+
 =head1 AUTHOR
 
 Johan Lindstrom - C<johanl@cpan.org> on behalf of
