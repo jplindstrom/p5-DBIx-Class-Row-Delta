@@ -16,7 +16,7 @@ string with the changed values.
   use DBIx::Class::Row::Delta;
 
   my $book = $book_rs->find(321);
-  my $book_notes_delta = NAP::DBIC::Row::Delta->new({
+  my $book_notes_delta = DBIC::Row::Delta->new({
       dbic_row    => $book,
       changes_sub => sub {
           my ($row) = @_;

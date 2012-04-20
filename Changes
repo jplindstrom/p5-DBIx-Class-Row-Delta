@@ -2,8 +2,9 @@ Revision history for DBIx::Class::Row::Delta
 
 {{$NEXT}}
 
-0.0.1     2012-04-20 15:07:29 Europe/London
+POD fix
 
-0.0.1 -- 2012-04-20 23:15:46 UTC
+
+0.0.1     2012-04-20 15:07:29 Europe/London
 
 First release to CPAN.
