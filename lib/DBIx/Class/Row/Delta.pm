@@ -9,7 +9,7 @@ DBIC row object.
 =head1 DESCRIPTION
 
 Record an initial set of values for a DBIC row, and later on get a
-string of the changed values.
+string with the changed values.
 
 =head1 SYNOPSIS
 
@@ -17,7 +17,7 @@ string of the changed values.
 
   my $book = $book_rs->find(321);
   my $book_notes_delta = NAP::DBIC::Row::Delta->new({
-      dbic_row => $book,
+      dbic_row    => $book,
       changes_sub => sub {
           my ($row) = @_;
           return {
@@ -35,7 +35,7 @@ string of the changed values.
   # Note: this will discard_changes on $book.
   my $changes_string = $book_notes_delta->changes;
   # e.g.
-  # Book id(321) changed: Book SKU (1933021-002 => 1933023-001), Delivery Date (2012-01-18 => 2012-01-22)
+  # Book SKU (1933021-002 => 1933023-001), Delivery Date (2012-01-18 => 2012-01-22)
 
 =cut
 
@@ -47,6 +47,22 @@ has _initial_key_value => (is => "rw", isa => "HashRef", default => sub { +{} })
 
 no Moose;
 
+=head1 METHODS
+
+=head2 new({ $dbic_row!, &$changes_sub! }) : $new_object | die
+
+Create a new object. Start by taking a snapshot of the contents of
+$dbic_row by calling $changes_sub->($dbic_row).
+
+The sub ref $changes_sub should return a hash ref with keys and values
+that describe the state of the object. If the values look weird when
+stringified, you're responsible for formatting them properly. All the
+hash ref values should be strings or undef.
+
+Both dbic_row and changes_sub are required.
+
+=cut
+
 sub BUILD {
     my $self = shift;
     my ($args) = @_;
@@ -54,6 +70,21 @@ sub BUILD {
         $self->changes_sub->( $self->dbic_row ),
     );
 }
+
+=head2 changes() : $delta_string | undef
+
+Return a string representation of the diff between the initial
+snapshot and the current state of $dbic_row, or return undef if they
+are the same. Only the changed values are reported.
+
+Example:
+
+    Book SKU (1933021-002 => 1933023-001), Delivery Date (2012-01-18 => 2012-01-22)
+
+Note: This will start by calling $dbic_row->discard to refresh the
+data properly.
+
+=cut
 
 sub changes {
     my $self = shift;
