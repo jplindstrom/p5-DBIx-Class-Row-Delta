@@ -1,4 +1,4 @@
 /.build/*
 /cover_db/*
 /covered/*
-
+/DBIx-Class-Row-Delta-*
