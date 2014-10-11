@@ -2,6 +2,11 @@ Revision history for DBIx::Class::Row::Delta
 
 {{$NEXT}}
 
+
+
+
+0.0.5 -- 2014-10-11 20:25:46 UTC
+
 Fixed dist.ini config
 
 Fixed too strict test
