@@ -24,7 +24,7 @@ sub simple_delta {
 sub test_new_fail : Tests() {
     throws_ok(
         sub { DBIx::Class::Row::Delta->new() },
-        qr/is required at constructor/ms,
+        qr/is required at /ms,
         "Missing required params dies ok",
     );
 }
